@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+          font-family: 'Segoe UI', sans-serif;
+          background-color: #f4f4f4;
+          text-align: center;
+          padding: 50px;
+        }
+    
+        .game-container {
+          background-color: #ffffff;
+          padding: 30px;
+          max-width: 400px;
+          margin: auto;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    
+        input[type="number"] {
+          padding: 10px;
+          font-size: 16px;
+          width: 60px;
+        }
+    
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          margin-top: 10px;
+          background-color: darkgreen;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    
+        #message {
+          margin-top: 20px;
+          font-weight: bold;
+        }
+      </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Number Guessing Game</h1>
+        <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+    
+        <input type="number" id="guessInput" min="1" max="100">
+        <br>
+        <button onclick="checkGuess()">Guess</button>
+    
+        <p id="message"></p>
+      </div>
+    
+      <script>
+        const secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+    
+        function checkGuess() {
+          const guess = parseInt(document.getElementById('guessInput').value);
+          attempts++;
+    
+          const message = document.getElementById('message');
+          if (isNaN(guess) || guess < 1 || guess > 100) {
+            message.textContent = "Please enter a number between 1 and 100.";
+          } else if (guess < secretNumber) {
+            message.textContent = "Too low! Try again.";
+          } else if (guess > secretNumber) {
+            message.textContent = "Too high! Try again.";
+          } else {
+            message.textContent = `Correct! You guessed it in ${attempts} tries! 🎉`;
+          }
+        }
+      </script>
+</body>
+</html>
